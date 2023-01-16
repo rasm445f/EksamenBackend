@@ -80,6 +80,7 @@ public class UserResource {
 //        return Response.ok().entity(GSON.toJson(FACADE.getAllUsers())).build();
 //    }
 
+
 //    @POST
 //    @Path("/favorite")
 //    @Consumes({MediaType.APPLICATION_JSON})
