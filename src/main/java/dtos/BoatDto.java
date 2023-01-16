@@ -5,6 +5,7 @@ import entities.Boat;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,6 +33,23 @@ public class BoatDto implements Serializable {
         this.image = image;
         this.name = name;
         this.harborID = harborID;
+    }
+    public BoatDto(Boat boat){
+        this.id = boat.getId();
+        this.brand = boat.getBrand();
+        this.make = boat.getMake();
+        this.image = boat.getImage();
+        this.name = boat.getName();
+        this.harborID = new HarborDto(boat.getHarborID().getId(), boat.getHarborID().getName(), boat.getHarborID().getAdress(), boat.getHarborID().getCapasity());
+
+    }
+
+    public static List<BoatDto> getBoatDtos(List<Boat> boats) {
+        List<BoatDto> boatDtoList = new ArrayList<>();
+        boats.forEach(boat -> {
+            boatDtoList.add(new BoatDto(boat));
+        });
+        return boatDtoList;
     }
 
 
@@ -87,4 +105,5 @@ public class BoatDto implements Serializable {
                 "name = " + name + ", " +
                 "harborID = " + harborID + ")";
     }
+
 }

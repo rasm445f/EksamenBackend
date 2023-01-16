@@ -1,6 +1,6 @@
 package dtos;
 
-import entities.Role;
+
 import entities.User;
 import org.mindrot.jbcrypt.BCrypt;
 

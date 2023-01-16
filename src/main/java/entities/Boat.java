@@ -34,6 +34,19 @@ public class Boat {
     @JoinColumn(name = "harborID", nullable = false)
     private Harbor harborID;
 
+    public Boat (String brand, String make, String image, String name) {
+        this.brand = brand;
+        this.make = make;
+        this.image = image;
+        this.name = name;
+
+    }
+
+    public Boat() {
+
+    }
+
+
     public Integer getId() {
         return id;
     }

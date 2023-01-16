@@ -2,13 +2,8 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dtos.BoatDto;
-import dtos.HarborDto;
-import dtos.OwnerDto;
 import dtos.UserDTO;
-import entities.Boat;
-import entities.Harbor;
-import entities.OwnerBoatId;
+import entities.Role;
 import entities.User;
 import errorhandling.API_Exception;
 import facades.UserFacade;
@@ -72,15 +67,6 @@ public class UserResource {
         UserDTO deleted = FACADE.deleteUser(id);
         return Response.ok().entity(GSON.toJson(deleted)).build();
     }
-
-//    @GET
-//    @Path("/boat")
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public Response getAll() throws NotFoundException {
-//        return Response.ok().entity(GSON.toJson(FACADE.getAllUsers())).build();
-//    }
-
-
 //    @POST
 //    @Path("/favorite")
 //    @Consumes({MediaType.APPLICATION_JSON})
@@ -89,32 +75,32 @@ public class UserResource {
 //        FavoritesDTO theFan = FACADE.addFavorite(favorites);
 //        return Response.ok().entity(GSON.toJson(theFan)).build();
 //    }
-
-//   @GET
+//
+//    @GET
 //    @Path("/{id}+favorite")
 //    @Produces({MediaType.APPLICATION_JSON})
 //    public Response getAllFavorites(@PathParam("id")int id) throws API_Exception, IOException {
-//        List<HarborDto> harborList = FACADE.getAllFavoritesFromID(id);
+//        List<FavoritesDTO> favoritesList = FACADE.getAllFavoritesFromID(id);
 //        List<CharityDTO> getThese = new ArrayList<>();
-//       AllCategories allCategories = new AllCategories();
-//       for (FavoritesDTO f : favoritesList) {
-//           boolean accepted = false;
-//           for (String s: allCategories.getList()) {
-//               if(accepted == true){break;}
-//               String nonprofit = HttpUtils.fetchData("https://partners.every.org/v0.2/search/" + s + "?apiKey=2b719ff3063ef1714c32edbfdd7af870&take=50");
-//               NonProfitDTO nonProfitDTO = GSON.fromJson(nonprofit, NonProfitDTO.class);
-//               for (CharityDTO c:nonProfitDTO.getNonprofits()) {
-//                   if(accepted == true){break;}
-//                   if (c.getSlug().equals(f.getSlug())){
-//                       getThese.add(c);
-//                       accepted = true;
-//                   }
-//               }
-//           }
-//       }
-//       String nonprofit = HttpUtils.fetchData("https://partners.every.org/v0.2/search/pets?apiKey=2b719ff3063ef1714c32edbfdd7af870&take=50");
-//       NonProfitDTO nonProfitDTO =GSON.fromJson(nonprofit, NonProfitDTO.class);
-//       nonProfitDTO.setNonprofits(getThese);
+//        AllCategories allCategories = new AllCategories();
+//        for (FavoritesDTO f : favoritesList) {
+//            boolean accepted = false;
+//            for (String s: allCategories.getList()) {
+//                if(accepted == true){break;}
+//                String nonprofit = HttpUtils.fetchData("https://partners.every.org/v0.2/search/" + s + "?apiKey=2b719ff3063ef1714c32edbfdd7af870&take=50");
+//                NonProfitDTO nonProfitDTO = GSON.fromJson(nonprofit, NonProfitDTO.class);
+//                for (CharityDTO c:nonProfitDTO.getNonprofits()) {
+//                    if(accepted == true){break;}
+//                    if (c.getSlug().equals(f.getSlug())){
+//                        getThese.add(c);
+//                        accepted = true;
+//                    }
+//                }
+//            }
+//        }
+//        String nonprofit = HttpUtils.fetchData("https://partners.every.org/v0.2/search/pets?apiKey=2b719ff3063ef1714c32edbfdd7af870&take=50");
+//        NonProfitDTO nonProfitDTO =GSON.fromJson(nonprofit, NonProfitDTO.class);
+//        nonProfitDTO.setNonprofits(getThese);
 //        return  Response.ok().entity(GSON.toJson(nonProfitDTO)).build();
 //    }
 }
