@@ -14,6 +14,7 @@ import errorhandling.API_Exception;
 import facades.HarborFacade;
 import facades.UserFacade;
 import javassist.NotFoundException;
+import security.errorhandling.AuthenticationException;
 import utils.EMF_Creator;
 import utils.HttpUtils;
 
@@ -43,6 +44,13 @@ public class HarborResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response getHarbor(@PathParam("id") int id) throws API_Exception {
         return Response.ok().entity(GSON.toJson(FACADE.getHarborById(id))).build();
+    }
+
+    @GET
+    @Path("/harbour/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getBoatByHarborID(@PathParam("id") int id) throws AuthenticationException {
+        return Response.ok().entity(GSON.toJson(FACADE.getBoatsByHarbour(id))).build();
     }
 
     @POST

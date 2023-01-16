@@ -3,10 +3,8 @@ package facades;
 
 import dtos.BoatDto;
 import dtos.HarborDto;
-import entities.Boat;
+import entities.*;
 import entities.Harbor;
-import entities.Harbor;
-import entities.Role;
 
 import javax.persistence.*;
 
@@ -96,6 +94,24 @@ public class HarborFacade {
 
 
     }
+
+
+    //todo: make done later
+    public Boat getBoatsByHarbour(int id) throws AuthenticationException {
+        EntityManager em = emf.createEntityManager();
+        Boat boat;
+        try {
+            TypedQuery<Boat> query = em.createQuery("select u from Boat u where u.harborID= :id", Boat.class);
+            query.setParameter("id", id);
+            boat = query.getSingleResult();
+        } catch (NoResultException e) {
+            throw new AuthenticationException("Invalid harbour id");
+        } finally {
+            em.close();
+        }
+        return boat;
+    }
+
 
     public HarborDto deleteHarbor(int id) throws API_Exception {
         EntityManager em = getEntityManager();

@@ -18,6 +18,9 @@ public class OwnerBoat {
     @JoinColumn(name = "boatID", nullable = false)
     private Boat boatID;
 
+    public OwnerBoat() {
+    }
+
     public OwnerBoatId getId() {
         return id;
     }

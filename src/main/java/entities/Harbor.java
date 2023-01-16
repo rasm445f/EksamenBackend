@@ -31,6 +31,9 @@ public class Harbor {
     public Harbor(String name, String adress, Integer capasity) {
 
     }
+    public Harbor(){
+
+    }
 
     public Integer getId() {
         return id;

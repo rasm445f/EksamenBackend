@@ -17,6 +17,9 @@ public class OwnerBoatId implements Serializable {
     @Column(name = "boatID", nullable = false)
     private Integer boatID;
 
+    public OwnerBoatId() {
+    }
+
     public Integer getOwnerID() {
         return ownerID;
     }
