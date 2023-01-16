@@ -28,6 +28,10 @@ public class Harbor {
     @Column(name = "capasity", nullable = false)
     private Integer capasity;
 
+    public Harbor(String name, String adress, Integer capasity) {
+
+    }
+
     public Integer getId() {
         return id;
     }

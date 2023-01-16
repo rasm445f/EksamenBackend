@@ -2,16 +2,16 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dtos.BoatDto;
 import dtos.HarborDto;
-import dtos.OwnerDto;
+import dtos.HarborDto;
+import dtos.HarborDto;
 import dtos.UserDTO;
-import entities.Boat;
+import entities.Harbor;
 import entities.Harbor;
 import entities.OwnerBoatId;
 import entities.User;
 import errorhandling.API_Exception;
-import facades.BoatFacade;
+import facades.HarborFacade;
 import facades.UserFacade;
 import javassist.NotFoundException;
 import utils.EMF_Creator;
@@ -26,33 +26,33 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("boat")
-public class BoatResource {
+@Path("harbor")
+public class HarborResource {
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
-    private static final BoatFacade FACADE =  BoatFacade.getBoatFacade(EMF);
+    private static final HarborFacade FACADE =  HarborFacade.getHarborFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     @GET
-    @Path("/allBoats")
+    @Path("/allBoatsInHarbor")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAll() throws NotFoundException {
-        return Response.ok().entity(GSON.toJson(FACADE.getAllBoats())).build();
+        return Response.ok().entity(GSON.toJson(FACADE.getAllHarbors())).build();
     }
 
     @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getBoat(@PathParam("id") int id) throws API_Exception {
-        return Response.ok().entity(GSON.toJson(FACADE.getBoatById(id))).build();
+    public Response getHarbor(@PathParam("id") int id) throws API_Exception {
+        return Response.ok().entity(GSON.toJson(FACADE.getHarborById(id))).build();
     }
 
     @POST
     @Path("/add")
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response create(String boat) {
-        Boat boatTwo =GSON.fromJson(boat, Boat.class);
-        Boat burner = new Boat(boatTwo.getBrand(), boatTwo.getMake(), boatTwo.getImage(), boatTwo.getName());
-        Boat newBoat = FACADE.createBoat(burner);
-        return Response.ok().entity(GSON.toJson(newBoat)).build();
+    public Response create(String harbor) {
+        Harbor harborTwo =GSON.fromJson(harbor, Harbor.class);
+        Harbor burner = new Harbor(harborTwo.getName(), harborTwo.getAdress(), harborTwo.getCapasity());
+        Harbor newHarbor = FACADE.createHarbor(burner);
+        return Response.ok().entity(GSON.toJson(newHarbor)).build();
 
     }
 //    @PUT
@@ -75,7 +75,7 @@ public class BoatResource {
 //    }
 
 //    @GET
-//    @Path("/boat")
+//    @Path("/owner")
 //    @Produces({MediaType.APPLICATION_JSON})
 //    public Response getAll() throws NotFoundException {
 //        return Response.ok().entity(GSON.toJson(FACADE.getAllUsers())).build();

@@ -23,11 +23,16 @@ public class Owner {
 
     @Size(max = 45)
     @Column(name = "owner_phonenum", length = 45)
-    private String ownerPhonenum;
+    private Integer ownerPhonenum;
 
-    @Size(max = 45)
-    @Column(name = "ownercol", length = 45)
-    private String ownercol;
+
+
+    public Owner(String ownerName, String ownerAdress, int ownerPhonenum) {
+    }
+
+    public Owner() {
+
+    }
 
     public Integer getId() {
         return id;
@@ -53,20 +58,13 @@ public class Owner {
         this.ownerAdress = ownerAdress;
     }
 
-    public String getOwnerPhonenum() {
+    public int getOwnerPhonenum() {
         return ownerPhonenum;
     }
 
-    public void setOwnerPhonenum(String ownerPhonenum) {
+    public void setOwnerPhonenum(int ownerPhonenum) {
         this.ownerPhonenum = ownerPhonenum;
     }
 
-    public String getOwnercol() {
-        return ownercol;
-    }
-
-    public void setOwnercol(String ownercol) {
-        this.ownercol = ownercol;
-    }
 
 }

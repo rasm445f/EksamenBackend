@@ -1,9 +1,12 @@
 package dtos;
 
+import entities.Boat;
 import entities.Owner;
 
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -16,16 +19,32 @@ public class OwnerDto implements Serializable {
     @Size(max = 45)
     private final String ownerAdress;
     @Size(max = 45)
-    private final String ownerPhonenum;
-    @Size(max = 45)
-    private final String ownercol;
+    private final Integer ownerPhonenum;
 
-    public OwnerDto(Integer id, String ownerName, String ownerAdress, String ownerPhonenum, String ownercol) {
+
+
+    public OwnerDto(Integer id, String ownerName, String ownerAdress, int ownerPhonenum) {
         this.id = id;
         this.ownerName = ownerName;
         this.ownerAdress = ownerAdress;
         this.ownerPhonenum = ownerPhonenum;
-        this.ownercol = ownercol;
+
+    }
+
+    public OwnerDto(Owner owner) {
+        this.id = owner.getId();
+        this.ownerName = owner.getOwnerName();
+        this.ownerAdress = owner.getOwnerAdress();
+        this.ownerPhonenum = owner.getOwnerPhonenum();
+
+    }
+
+    public static List<OwnerDto> getOwnerDtos(List<Owner> owners) {
+        List<OwnerDto> ownerDtoList = new ArrayList<>();
+        owners.forEach(owner -> {
+            ownerDtoList.add(new OwnerDto(owner));
+        });
+        return ownerDtoList;
     }
 
     public Integer getId() {
@@ -40,13 +59,10 @@ public class OwnerDto implements Serializable {
         return ownerAdress;
     }
 
-    public String getOwnerPhonenum() {
+    public int getOwnerPhonenum() {
         return ownerPhonenum;
     }
 
-    public String getOwnercol() {
-        return ownercol;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -56,13 +72,13 @@ public class OwnerDto implements Serializable {
         return Objects.equals(this.id, entity.id) &&
                 Objects.equals(this.ownerName, entity.ownerName) &&
                 Objects.equals(this.ownerAdress, entity.ownerAdress) &&
-                Objects.equals(this.ownerPhonenum, entity.ownerPhonenum) &&
-                Objects.equals(this.ownercol, entity.ownercol);
+                Objects.equals(this.ownerPhonenum, entity.ownerPhonenum);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ownerName, ownerAdress, ownerPhonenum, ownercol);
+        return Objects.hash(id, ownerName, ownerAdress, ownerPhonenum);
     }
 
     @Override
@@ -71,7 +87,6 @@ public class OwnerDto implements Serializable {
                 "id = " + id + ", " +
                 "ownerName = " + ownerName + ", " +
                 "ownerAdress = " + ownerAdress + ", " +
-                "ownerPhonenum = " + ownerPhonenum + ", " +
-                "ownercol = " + ownercol + ")";
+                "ownerPhonenum = " + ownerPhonenum + ", ";
     }
 }

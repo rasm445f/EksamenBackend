@@ -1,10 +1,13 @@
 package dtos;
 
 import entities.Harbor;
+import entities.Owner;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -26,6 +29,21 @@ public class HarborDto implements Serializable {
         this.name = name;
         this.adress = adress;
         this.capasity = capasity;
+    }
+
+    public HarborDto(Harbor harbor){
+        this.id = harbor.getId();
+        this.name = harbor.getName();
+        this.adress = harbor.getAdress();
+        this.capasity = harbor.getCapasity();
+    }
+
+    public static List<HarborDto> getHarborDtos(List<Harbor> harbors) {
+        List<HarborDto> harborDtoList = new ArrayList<>();
+        harbors.forEach(harbor -> {
+            harborDtoList.add(new HarborDto(harbor));
+        });
+        return harborDtoList;
     }
 
     public Integer getId() {
