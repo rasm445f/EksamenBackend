@@ -1,35 +1,30 @@
 package facades;
 
 
-import dtos.BoatDto;
-import dtos.OwnerDto;
-import entities.Boat;
-import entities.Harbor;
-import entities.Owner;
-import entities.Role;
-
-import javax.persistence.*;
-
+import dtos.HouseDto;
+import entities.House;
 import errorhandling.API_Exception;
 import javassist.NotFoundException;
-import security.errorhandling.AuthenticationException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
  * @author lam@cphbusiness.dk
  */
-public class OwnerFacade {
+public class HouseFacade {
     private static EntityManagerFactory emf;
-    private static OwnerFacade instance;
+    private static HouseFacade instance;
 
-    private OwnerFacade() {
+    private HouseFacade() {
     }
 
-    public static OwnerFacade getOwnerFacade(EntityManagerFactory _emf) {
+    public static HouseFacade getHouseFacade(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
-            instance = new OwnerFacade();
+            instance = new HouseFacade();
         }
         return instance;
     }
@@ -38,99 +33,101 @@ public class OwnerFacade {
         return emf.createEntityManager();
     }
 
-    public Owner createOwner(Owner owner) {
+    public House createHouse(House house) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(owner);
+            em.persist(house);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
-        return owner;
+        return house;
     }
 
-//    public Owner createOwner(Owner owner, Harbor harbor) {
+//    public House createHouse(House house, Harbor harbor) {
 //        EntityManager em = getEntityManager();
 //
 //        if(harbor==null){
 //            Harbor defaultHarbor = new Harbor();
-//            owner.addRole(defaultRole);
+//            house.addRole(defaultRole);
 //        }
 //        else{
-//            owner.addRole(role);
+//            house.addRole(role);
 //        }
 //        try {
 //            em.getTransaction().begin();
-//            em.persist(owner);
+//            em.persist(house);
 //            em.getTransaction().commit();
 //        } finally {
 //            em.close();
 //        }
-//        return owner;
+//        return house;
 //    }
 
 
-    public List<OwnerDto> getAllOwners() throws NotFoundException {
+    public List<HouseDto> getAllHouses() throws NotFoundException {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Owner> query = em.createQuery("SELECT u FROM Owner u", Owner.class);
+            TypedQuery<House> query = em.createQuery("SELECT u FROM House u", House.class);
             if (query == null) {
-                throw new NotFoundException("Can't find any owners");
+                throw new NotFoundException("Can't find any houses");
             }
-            List<Owner> owners = query.getResultList();
-            return OwnerDto.getOwnerDtos(owners);
+            List<House> houses = query.getResultList();
+            return HouseDto.getHouseDtos(houses);
         } finally {
             em.close();
         }
     }
 
-    public OwnerDto getOwnerById(int id) throws API_Exception {
+
+    public HouseDto getHouseById(int id) throws API_Exception {
         EntityManager em = getEntityManager();
 
-        Owner owner = em.find(Owner.class, id);
-        if (owner == null)
-            throw new API_Exception("There's no owner with that id", 404);
+        House house = em.find(House.class, id);
+        if (house == null)
+            throw new API_Exception("There's no house with that id", 404);
         em.close();
-        return new OwnerDto(owner);
+        return new HouseDto(house);
 
 
     }
 
-    public OwnerDto deleteOwner(int id) throws API_Exception {
+    public HouseDto deleteHouse(int id) throws API_Exception {
         EntityManager em = getEntityManager();
-        Owner owner;
+        House house;
         try {
-            owner = em.find(Owner.class, id);
-            if (owner == null) {
-                throw new API_Exception("Can't find a owner with the ownername: " + id);
+            house = em.find(House.class, id);
+            if (house == null) {
+                throw new API_Exception("Can't find a house with the housename: " + id);
             }
             em.getTransaction().begin();
-            em.remove(owner);
+            em.remove(house);
             em.getTransaction().commit();
-            return new OwnerDto(owner);
+            return new HouseDto(house);
         } finally {
             em.close();
         }
     }
 
 
-    public OwnerDto updateOwner(int id, Owner ownerUpdate) {
-        EntityManager em = getEntityManager();
-        Owner owner;
-        try {
-            owner = em.find(Owner.class, id);
-            em.getTransaction().begin();
-            owner.setOwnerName(ownerUpdate.getOwnerName());
-            owner.setOwnerAdress(ownerUpdate.getOwnerAdress());
-            owner.setOwnerPhonenum(ownerUpdate.getOwnerPhonenum());
-            em.getTransaction().commit();
-            return new OwnerDto(owner);
-        } finally {
-            em.close();
-        }
-
-    }
+//    public HouseDto updateHouse(int id, House houseUpdate) {
+//        EntityManager em = getEntityManager();
+//        House house;
+//        try {
+//            house = em.find(House.class, id);
+//            em.getTransaction().begin();
+//            house.setStartDate(houseUpdate.getStartDate());
+//            house.setEndDate(houseUpdate.getEndDate());
+//            house.setPriceAnnual(houseUpdate.getPriceAnnual());
+//            house.setDeposit(houseUpdate.getDeposit());
+//            em.getTransaction().commit();
+//            return new HouseDto(house);
+//        } finally {
+//            em.close();
+//        }
+//
+//    }
 
 //    public OwnerDto addOwner(Boat boat) throws API_Exception {
 //        EntityManager em = getEntityManager();
@@ -158,4 +155,6 @@ public class OwnerFacade {
 
 
 }
+
+
 

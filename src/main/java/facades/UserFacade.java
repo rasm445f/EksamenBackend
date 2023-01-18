@@ -1,9 +1,9 @@
 package facades;
 
 
-import dtos.BoatDto;
+
 import dtos.UserDTO;
-import entities.Boat;
+
 import entities.Role;
 import entities.User;
 
