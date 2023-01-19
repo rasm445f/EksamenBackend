@@ -72,12 +72,12 @@ public class HouseResource {
         return Response.ok().entity(GSON.toJson(deleted)).build();
     }
 
-//    @GET
-//    @Path("/tenant/{id}")
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public Response getBoatByHarborID(@PathParam("id") int id) throws NotFoundException {
-//        return Response.ok().entity(GSON.toJson(FACADE.getAllHousesOfTenantID(id))).build();
-//    }
+    @GET
+    @Path("/tenant/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getBoatByHarborID(@PathParam("id") int id) throws NotFoundException, API_Exception {
+        return Response.ok().entity(GSON.toJson(FACADE.getAllTenantsFromHouseId(id))).build();
+    }
 //    @POST
 //    @Path("/favorite")
 //    @Consumes({MediaType.APPLICATION_JSON})

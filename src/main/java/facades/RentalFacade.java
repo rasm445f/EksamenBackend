@@ -112,15 +112,10 @@ public class RentalFacade {
 
     public List<RentalDto> getAllRentalsOfTenantID(int tenantId) throws NotFoundException {
         EntityManager em = getEntityManager();
+        Tenant tenant = em.find(Tenant.class,tenantId);
 
         try {
-            TypedQuery<Rental> query = em.createQuery("select r.id, r.startDate, r.endDate, r.priceAnnual, r.deposit from Rental r join Tenant t where t.id =:tenantId", Rental.class);
-
-            query.setParameter("tenantId", tenantId);
-            if (query == null) {
-                throw new NotFoundException("Can't find any rentals");
-            }
-            List<Rental> rentals = query.getResultList();
+            List<Rental> rentals = tenant.getRentalsNEW();
             return RentalDto.getRentalDtos(rentals);
         } finally {
             em.close();

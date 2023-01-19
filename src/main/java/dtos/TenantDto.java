@@ -21,7 +21,7 @@ public class TenantDto implements Serializable {
     private final String name;
     @Size(max = 45)
     private final String job;
-    private final List<Rental> rentals;
+    private List<Rental> rentals;
 
     public TenantDto(Integer id, String name, String job, List<Rental> rentals) {
         this.id = id;
@@ -34,7 +34,10 @@ public class TenantDto implements Serializable {
         this.id = tenant.getId();
         this.name = tenant.getTenantName();
         this.job = tenant.getTenantJob();
-        this.rentals = tenant.getRentalsNEW();
+        if(tenant.getRentalsNEW() != null){
+            this.rentals = tenant.getRentalsNEW();
+        }
+
     }
 
     public static List<TenantDto> getTenantsDtos(List<Tenant> tenants) {

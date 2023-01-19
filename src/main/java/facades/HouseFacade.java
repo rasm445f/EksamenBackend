@@ -1,8 +1,9 @@
 package facades;
 
-
+import dtos.TenantDto;
 import dtos.HouseDto;
 import entities.House;
+import entities.Tenant;
 import errorhandling.API_Exception;
 import javassist.NotFoundException;
 
@@ -109,6 +110,39 @@ public class HouseFacade {
             em.close();
         }
     }
+
+    public List<TenantDto> getAllTenantsFromHouseId(int houseId) throws API_Exception {
+        EntityManager em = getEntityManager();
+
+        try {
+            TypedQuery<Tenant> query = em.createQuery("SELECT t FROM Tenant t JOIN t.rentals r WHERE r.JThomeID = :houseId", Tenant.class);
+            query.setParameter("houseId", houseId);
+            query.setParameter("houseId",houseId);
+            List<Tenant> tenants = query.getResultList();//"SELECT t FROM Tenant t JOIN t.rentals r WHERE r.houseID = :houseId", Tenant.class);
+            query.setParameter("houseId", houseId);
+            return TenantDto.getTenantsDtos(tenants);
+
+        } finally {
+            em.close();
+        }
+    }
+
+//    public List<TenantDto> getAllTenantsOfHouseID(int houseId) throws NotFoundException {
+//        EntityManager em = getEntityManager();
+//
+//        try {
+//            TypedQuery<Tenant> query = em.createQuery("SELECT t FROM Tenant t JOIN t.rentals r JOIN r.houseID h WHERE h.id = :houseId", Tenant.class);
+//            query.setParameter("houseId", houseId);
+//            if (query == null) {
+//                throw new NotFoundException("Can't find any rentals");
+//            }
+//            List<Tenant> tenants = query.getResultList();
+//            return TenantDto.getTenantDtos(tenants);
+//        } finally {
+//            em.close();
+//        }
+//    }
+
 
 
 //    public HouseDto updateHouse(int id, House houseUpdate) {

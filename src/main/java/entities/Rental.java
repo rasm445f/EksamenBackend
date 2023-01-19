@@ -6,9 +6,13 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
+@NamedQuery(name = "Rental.deleteAllRows", query = "DELETE from Rental ")
 @Table(name = "rental")
 public class Rental {
+
+
     @Id()
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,13 +46,6 @@ public class Rental {
             inverseJoinColumns = @JoinColumn(name = "JTtenantID"))
     private List<Tenant> tenants = new ArrayList<>();
 
-//    public Rental(String startDate, String endDate, String priceAnnual, String deposit, List<Tenant> tenants) {
-//        this.startDate = startDate;
-//        this.endDate = endDate;
-//        this.priceAnnual = priceAnnual;
-//        this.deposit = deposit;
-//        this.tenants= tenants;
-//    }
     public Rental(String startDate, String endDate, int priceAnnual, int deposit, House JThomeID, List<Tenant> tenants) {
         this.startDate = startDate;
         this.endDate = endDate;

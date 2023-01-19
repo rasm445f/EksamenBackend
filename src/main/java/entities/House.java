@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+@NamedQuery(name = "House.deleteAllRows", query = "DELETE from House ")
 @Table(name = "house")
 public class House {
     @Id
