@@ -1,12 +1,10 @@
 package facades;
 
-
 import dtos.RentalDto;
 import entities.Rental;
 import entities.Tenant;
 import errorhandling.API_Exception;
 import javassist.NotFoundException;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
@@ -80,13 +78,6 @@ public class RentalFacade {
         } finally {
             em.close();
         }
-    }
-
-    public List<Rental> getRentalsByTenantId(Integer tenantId) {
-        EntityManager em = getEntityManager();
-        TypedQuery<Rental> query = em.createQuery("SELECT r FROM Rental r JOIN r.tenants t WHERE t.id = :tenantId", Rental.class);
-        query.setParameter("tenantId", tenantId);
-        return query.getResultList();
     }
 
     public List<RentalDto> getAllRentalsOfTenantID(int tenantId) throws NotFoundException {

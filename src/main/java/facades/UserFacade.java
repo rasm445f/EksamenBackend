@@ -1,19 +1,12 @@
 package facades;
 
-
-
 import dtos.UserDTO;
-
 import entities.Role;
 import entities.User;
-
 import javax.persistence.*;
-
 import errorhandling.API_Exception;
 import javassist.NotFoundException;
 import security.errorhandling.AuthenticationException;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,25 +48,25 @@ public class UserFacade {
         return user;
     }
 
-    public User createUser(User user, Role role) {
-        EntityManager em = getEntityManager();
-
-        if(role==null){
-            Role defaultRole = new Role("user");
-            user.addRole(defaultRole);
-        }
-        else{
-            user.addRole(role);
-        }
-        try {
-            em.getTransaction().begin();
-            em.persist(user);
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
-        return user;
-    }
+//    public User createUser(User user, Role role) {
+//        EntityManager em = getEntityManager();
+//
+//        if(role==null){
+//            Role defaultRole = new Role("user");
+//            user.addRole(defaultRole);
+//        }
+//        else{
+//            user.addRole(role);
+//        }
+//        try {
+//            em.getTransaction().begin();
+//            em.persist(user);
+//            em.getTransaction().commit();
+//        } finally {
+//            em.close();
+//        }
+//        return user;
+//    }
 
     public User getVerifiedUser(String username, String password) throws AuthenticationException {
         EntityManager em = emf.createEntityManager();
