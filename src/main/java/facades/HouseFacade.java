@@ -46,26 +46,6 @@ public class HouseFacade {
         return house;
     }
 
-//    public House createHouse(House house, Harbor harbor) {
-//        EntityManager em = getEntityManager();
-//
-//        if(harbor==null){
-//            Harbor defaultHarbor = new Harbor();
-//            house.addRole(defaultRole);
-//        }
-//        else{
-//            house.addRole(role);
-//        }
-//        try {
-//            em.getTransaction().begin();
-//            em.persist(house);
-//            em.getTransaction().commit();
-//        } finally {
-//            em.close();
-//        }
-//        return house;
-//    }
-
 
     public List<HouseDto> getAllHouses() throws NotFoundException {
         EntityManager em = getEntityManager();

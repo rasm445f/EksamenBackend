@@ -177,22 +177,4 @@ public class RentalResourceTest {
                 .statusCode(200)
                 .body("id", equalTo(t2.getId()));
     }
-
-
-
-/*
-    @Test
-    public void getAllUsers() throws Exception {
-        List<Rental> tripDTOs;
-        tripDTOs = given()
-                .contentType("application/json")
-                .when()
-                .get("/trip/all")
-                .then()
-                .extract().body().jsonPath().getList("", Trip.class);
-        TripDTO t1DTO = new TripDTO(t1);
-        TripDTO t2DTO = new TripDTO(t1);
-        assertThat(tripDTOs, containsInAnyOrder(t1DTO, t2DTO));
-    }
-    */
 }

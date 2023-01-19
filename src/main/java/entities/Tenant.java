@@ -20,9 +20,6 @@ public class Tenant {
     @Column(name = "tenant_job", length = 45)
     private String tenantJob;
 
-//    @ManyToMany(mappedBy = "tenants")
-//    private List<Rental> rentals;
-
     @ManyToMany
     @JoinTable(name = "tenant_rental",
             joinColumns = @JoinColumn(name = "JTtenantID"),
@@ -41,14 +38,6 @@ public class Tenant {
     public void setRentalsNEW(List<Rental> rentalsNEW) {
         this.rentalsNEW = rentalsNEW;
     }
-
-
-
-//    public Tenant(String tenantName, String tenantJob, List<Rental> rentals) {
-//        this.tenantName = tenantName;
-//        this.tenantJob = tenantJob;
-//        this.rentals = rentals;
-//    }
 
     public Tenant() {
     }

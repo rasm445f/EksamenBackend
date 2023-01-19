@@ -153,30 +153,4 @@ public class UserFacade {
         }
 
     }
-
-//    public BoatDto addBoat(Boat boat) throws API_Exception {
-//        EntityManager em = getEntityManager();
-//        try {
-//            em.getTransaction().begin();
-//            em.persist(boat);
-//            em.getTransaction().commit();
-//        } finally {
-//            em.close();
-//        }
-//        BoatDto theFan = new BoatDto(boat);
-//        return theFan;
-//    }
-//    public List<BoatDto> getAllBoatsFromID(int id){
-//        EntityManager em = getEntityManager();
-//        try {
-//            TypedQuery<Boat> query = em.createQuery("SELECT f FROM Boat f WHERE f.userid = ?1", Boat.class)
-//                    .setParameter(1,id);
-//            List<Boat> favoritesList = query.getResultList();
-//            return BoatDto.getFavoriteDTOs(favoritesList);
-//        } finally {
-//            em.close();
-//        }
-//    }
-
-
 }

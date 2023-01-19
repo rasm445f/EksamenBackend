@@ -68,27 +68,6 @@ public class RentalFacade {
     }
 
 
-//    public Rental createRental(Rental rental, Harbor harbor) {
-//        EntityManager em = getEntityManager();
-//
-//        if(harbor==null){
-//            Harbor defaultHarbor = new Harbor();
-//            rental.addRole(defaultRole);
-//        }
-//        else{
-//            rental.addRole(role);
-//        }
-//        try {
-//            em.getTransaction().begin();
-//            em.persist(rental);
-//            em.getTransaction().commit();
-//        } finally {
-//            em.close();
-//        }
-//        return rental;
-//    }
-
-
     public List<RentalDto> getAllRentals() throws NotFoundException {
         EntityManager em = getEntityManager();
         try {
@@ -169,32 +148,6 @@ public class RentalFacade {
         }
 
     }
-
-//    public OwnerDto addOwner(Boat boat) throws API_Exception {
-//        EntityManager em = getEntityManager();
-//        try {
-//            em.getTransaction().begin();
-//            em.persist(boat);
-//            em.getTransaction().commit();
-//        } finally {
-//            em.close();
-//        }
-//        BoatDto theFan = new BoatDto(boat);
-//        return theFan;
-//    }
-//    public List<BoatDto> getAllBoatsFromID(int id){
-//        EntityManager em = getEntityManager();
-//        try {
-//            TypedQuery<Boat> query = em.createQuery("SELECT f FROM Boat f WHERE f.userid = ?1", Boat.class)
-//                    .setParameter(1,id);
-//            List<Boat> favoritesList = query.getResultList();
-//            return BoatDto.getFavoriteDTOs(favoritesList);
-//        } finally {
-//            em.close();
-//        }
-//    }
-
-
 }
 
 

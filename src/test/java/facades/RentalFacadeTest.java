@@ -1,25 +1,20 @@
 package facades;
 
 import dtos.RentalDto;
-import dtos.RentalDto;
-import dtos.UserDTO;
 import entities.House;
 import entities.Tenant;
 import entities.Rental;
-import entities.User;
 import errorhandling.API_Exception;
 import javassist.NotFoundException;
 import org.junit.jupiter.api.*;
-import security.errorhandling.AuthenticationException;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class RentalFacadeTest {
 
